@@ -1,1 +1,17 @@
 @import "/node_modules/normalize.css/normalize.css";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+canvas {
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+}
