@@ -1,1 +1,3 @@
-export enum AssetKeys {}
+export enum AssetKeys {
+  DINO = "DINO",
+}
