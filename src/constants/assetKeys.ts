@@ -1,3 +1,3 @@
 export enum AssetKeys {
-  DINO = "DINO",
+  DINO_ATLAS = "DINO_ATLAS",
 }

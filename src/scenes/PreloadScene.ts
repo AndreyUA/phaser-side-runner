@@ -2,6 +2,7 @@ import * as Phaser from "phaser";
 
 import { AbstractScene } from "./AbstractScene";
 import { SceneKeys } from "../constants/sceneKeys";
+import { AssetKeys } from "../constants/assetKeys";
 
 export class PreloadScene extends AbstractScene {
   constructor() {
@@ -13,7 +14,7 @@ export class PreloadScene extends AbstractScene {
   }
 
   preload(): void {
-    // TODO: load assets here
+    this.load.atlas(AssetKeys.DINO_ATLAS, "./dino.png", "./dino.json");
   }
 
   create(): void {
