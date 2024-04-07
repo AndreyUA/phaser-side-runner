@@ -48,10 +48,16 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
   }
 
   onMove(): void {
-    if (
-      this.scene?.spaceCursor &&
-      Phaser.Input.Keyboard.JustDown(this.scene.spaceCursor)
-    ) {
+    if (!this.scene || !this.scene.spaceCursor) {
+      return;
+    }
+
+    const isDinoOnTheGround = this.body?.blocked?.down;
+    const isSpaceKeyDown = Phaser.Input.Keyboard.JustDown(
+      this.scene.spaceCursor
+    );
+
+    if (isDinoOnTheGround && isSpaceKeyDown) {
       this.setVelocityY(-550);
     }
   }
