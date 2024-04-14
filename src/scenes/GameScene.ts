@@ -26,9 +26,8 @@ export class GameScene extends AbstractScene {
   create(): void {
     super.create();
 
-    this.cactusesGroup = new CactusesGroup(this);
-
     this.createDino();
+    this.createCactuesGroup();
     this.createCursorKeys();
     this.generateCloud();
     this.initTimers();
@@ -36,6 +35,18 @@ export class GameScene extends AbstractScene {
 
   update(_time: number, _delta: number): void {
     this.dino?.onMove();
+  }
+
+  createCactuesGroup(): void {
+    this.cactusesGroup = new CactusesGroup(this);
+
+    this.physics.add.overlap(
+      this.dino!,
+      this.cactusesGroup,
+      this.onOverlap,
+      undefined,
+      this
+    );
   }
 
   generateCactus(): void {
@@ -58,6 +69,10 @@ export class GameScene extends AbstractScene {
 
   createDino(): void {
     this.dino = new Dino(this);
+  }
+
+  onOverlap(): void {
+    console.log("dino and cactus overlapped!");
   }
 
   initTimers(): void {
