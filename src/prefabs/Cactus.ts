@@ -23,11 +23,30 @@ export class Cactus extends Phaser.Physics.Arcade.Sprite {
     this.setDepth(2);
     this.setOrigin(1, 1);
 
-    this.startCactusMovement();
+    this.subscribeOnUpdates();
   }
 
-  startCactusMovement(): void {
-    this.setVelocityX(-660);
+  detectPositionForDestroy(): void {
+    if (this.x < -this.width) {
+      this.unSubscribeFromUpdates();
+      this.destroy();
+    }
+  }
+
+  subscribeOnUpdates(): void {
+    this.scene.events.on(
+      Phaser.Scenes.Events.UPDATE,
+      this.detectPositionForDestroy,
+      this
+    );
+  }
+
+  unSubscribeFromUpdates(): void {
+    this.scene.events.off(
+      Phaser.Scenes.Events.UPDATE,
+      this.detectPositionForDestroy,
+      this
+    );
   }
 
   static generateRandomXPosition(scene: GameScene): number {

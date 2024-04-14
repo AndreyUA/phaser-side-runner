@@ -4,11 +4,12 @@ import { AbstractScene } from "./AbstractScene";
 import { SceneKeys } from "../constants/sceneKeys";
 import { Dino } from "../prefabs/Dino";
 import { Cloud } from "../prefabs/Cloud";
-import { Cactus } from "../prefabs/Cactus";
+import { CactusesGroup } from "../prefabs/CactusesGroup";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
   dino: Dino | null = null;
+  cactusesGroup: CactusesGroup | null = null;
   cloudTimer: Phaser.Time.TimerEvent | null = null;
   cactusTimer: Phaser.Time.TimerEvent | null = null;
 
@@ -25,6 +26,8 @@ export class GameScene extends AbstractScene {
   create(): void {
     super.create();
 
+    this.cactusesGroup = new CactusesGroup(this);
+
     this.createDino();
     this.createCursorKeys();
     this.generateCloud();
@@ -36,7 +39,7 @@ export class GameScene extends AbstractScene {
   }
 
   generateCactus(): void {
-    new Cactus(this);
+    this.cactusesGroup?.generateNewCactus();
   }
 
   generateCloud(): void {
