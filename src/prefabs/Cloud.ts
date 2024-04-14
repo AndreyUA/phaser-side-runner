@@ -16,9 +16,7 @@ export class Cloud extends Phaser.Physics.Arcade.Sprite {
     this.scene = scene;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
-    if (this.body && this.body instanceof Phaser.Physics.Arcade.Body) {
-      this.body.allowGravity = false;
-    }
+
     this.setDepth(1);
 
     this.startCloudMovement();
@@ -34,7 +32,6 @@ export class Cloud extends Phaser.Physics.Arcade.Sprite {
 
   startCloudMovement(): void {
     this.setVelocityX(-300);
-    this.setGravityY(0);
   }
 
   subscribeOnUpdates(): void {

@@ -15,7 +15,6 @@ const config: Phaser.Types.Core.GameConfig = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { x: 0, y: 4_000 },
       debug: false,
     },
   },

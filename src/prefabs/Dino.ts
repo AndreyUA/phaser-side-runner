@@ -22,6 +22,9 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     if (this.body) {
       this.body.enable = true;
     }
+    if (this.body && this.body instanceof Phaser.Physics.Arcade.Body) {
+      this.body?.setGravityY(4_000);
+    }
     this.setDepth(2);
 
     this.setOrigin(0, 0);
