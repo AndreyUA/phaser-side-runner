@@ -34,6 +34,10 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
   }
 
   generateAtlasAnimation(): void {
+    if (this.scene.anims.exists(Animations.DINO_ANIMATION)) {
+      return;
+    }
+
     const frames = this.scene.anims.generateFrameNames(AssetKeys.DINO_ATLAS, {
       prefix: "dino-",
       suffix: ".png",

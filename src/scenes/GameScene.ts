@@ -93,7 +93,13 @@ export class GameScene extends AbstractScene {
   }
 
   onOverlap(): void {
-    console.log("dino and cactus overlapped!");
+    console.log("GAME OVER");
+
+    this.cloudTimer?.destroy();
+    this.cactusTimer?.destroy();
+    this.scoreTimer?.destroy();
+
+    this.scene.start(SceneKeys.START);
   }
 
   initTimers(): void {
