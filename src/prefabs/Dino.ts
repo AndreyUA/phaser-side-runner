@@ -11,7 +11,7 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
   constructor(scene: GameScene) {
     super(
       scene,
-      scene.cameras.main.width * 0.05,
+      scene.cameras.main.width * 0.1,
       scene.cameras.main.height - DINO_DIMENSIONS.height,
       AssetKeys.DINO_ATLAS,
       "dino-1.png"
@@ -26,8 +26,6 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
       this.body?.setGravityY(4_000);
     }
     this.setDepth(2);
-
-    this.setOrigin(0, 0);
     this.setCollideWorldBounds(true);
 
     this.generateAtlasAnimation();
@@ -69,6 +67,15 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
 
     if (isDinoOnTheGround && isSpaceKeyDown) {
       this.setVelocityY(-1_600);
+
+      this.scene.tweens.add({
+        targets: this,
+        angle: { from: 0, to: 360 },
+        duration: 700,
+        ease: "Linear",
+        repeat: 0,
+        yoyo: false,
+      });
     }
   }
 }
