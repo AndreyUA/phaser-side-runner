@@ -5,6 +5,7 @@ import { SceneKeys } from "../constants/sceneKeys";
 import { Dino } from "../prefabs/Dino";
 import { Cloud } from "../prefabs/Cloud";
 import { CactusesGroup } from "../prefabs/CactusesGroup";
+import { defaultTextStyle } from "../constants/defaultTextStyle";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
@@ -12,6 +13,9 @@ export class GameScene extends AbstractScene {
   cactusesGroup: CactusesGroup | null = null;
   cloudTimer: Phaser.Time.TimerEvent | null = null;
   cactusTimer: Phaser.Time.TimerEvent | null = null;
+  scoreTimer: Phaser.Time.TimerEvent | null = null;
+  statsText: Phaser.GameObjects.Text | null = null;
+  score: number = 0;
 
   constructor() {
     super({ key: SceneKeys.GAME, active: false });
@@ -27,8 +31,9 @@ export class GameScene extends AbstractScene {
     super.create();
 
     this.createDino();
-    this.createCactuesGroup();
+    this.createCactusesGroup();
     this.createCursorKeys();
+    this.createStatsText();
     this.generateCloud();
     this.initTimers();
   }
@@ -37,7 +42,11 @@ export class GameScene extends AbstractScene {
     this.dino?.onMove();
   }
 
-  createCactuesGroup(): void {
+  calculateScore(score: number = 0): string {
+    return `Score: ${score}`;
+  }
+
+  createCactusesGroup(): void {
     this.cactusesGroup = new CactusesGroup(this);
 
     this.physics.add.overlap(
@@ -47,14 +56,6 @@ export class GameScene extends AbstractScene {
       undefined,
       this
     );
-  }
-
-  generateCactus(): void {
-    this.cactusesGroup?.generateNewCactus();
-  }
-
-  generateCloud(): void {
-    new Cloud(this);
   }
 
   createCursorKeys(): void {
@@ -69,6 +70,26 @@ export class GameScene extends AbstractScene {
 
   createDino(): void {
     this.dino = new Dino(this);
+  }
+
+  createStatsText(): void {
+    this.statsText = this.add
+      .text(
+        this.cameras.main.width * 0.05,
+        this.cameras.main.height * 0.05,
+        this.calculateScore(),
+        defaultTextStyle
+      )
+      .setOrigin(0, 0)
+      .setDepth(3);
+  }
+
+  generateCactus(): void {
+    this.cactusesGroup?.generateNewCactus();
+  }
+
+  generateCloud(): void {
+    new Cloud(this);
   }
 
   onOverlap(): void {
@@ -88,5 +109,16 @@ export class GameScene extends AbstractScene {
       callbackScope: this,
       loop: true,
     });
+    this.scoreTimer = this.time.addEvent({
+      delay: 100,
+      callback: this.updateStatsText,
+      callbackScope: this,
+      loop: true,
+    });
+  }
+
+  updateStatsText(): void {
+    this.score++;
+    this.statsText?.setText(this.calculateScore(this.score));
   }
 }
