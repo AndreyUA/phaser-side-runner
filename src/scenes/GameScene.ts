@@ -95,6 +95,7 @@ export class GameScene extends AbstractScene {
   onOverlap(): void {
     console.log("GAME OVER");
 
+    this.score = 0;
     this.cloudTimer?.destroy();
     this.cactusTimer?.destroy();
     this.scoreTimer?.destroy();
