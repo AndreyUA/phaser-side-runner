@@ -35,6 +35,8 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
 
   generateAtlasAnimation(): void {
     if (this.scene.anims.exists(Animations.DINO_ANIMATION)) {
+      this.play(Animations.DINO_ANIMATION);
+
       return;
     }
 
@@ -48,7 +50,7 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     this.scene.anims.create({
       key: Animations.DINO_ANIMATION,
       frames,
-      frameRate: 2,
+      frameRate: 4,
       repeat: -1,
     });
 
