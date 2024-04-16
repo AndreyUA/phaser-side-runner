@@ -66,7 +66,7 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (isDinoOnTheGround && isSpaceKeyDown) {
-      this.setVelocityY(-1_600);
+      this.setVelocityY(-1_400);
 
       this.scene.tweens.add({
         targets: this,
