@@ -48,7 +48,7 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     this.scene.anims.create({
       key: Animations.DINO_ANIMATION,
       frames,
-      frameRate: 4,
+      frameRate: 6,
       repeat: -1,
     });
 
