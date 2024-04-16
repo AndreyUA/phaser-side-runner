@@ -27,7 +27,7 @@ export class StartScene extends AbstractScene {
       return;
     }
 
-    this.input.keyboard.once("keydown-SPACE", () => {
+    this.input.keyboard.once("keydown-ENTER", () => {
       this.scene.start(SceneKeys.GAME);
     });
   }
@@ -37,7 +37,7 @@ export class StartScene extends AbstractScene {
       .text(
         this.scene.scene.scale.width / 2,
         this.scene.scene.scale.height / 2,
-        "Press SPACE to start the game.",
+        "Press ENTER to start the game.\n\n      Use SPACE to jump.",
         defaultTextStyle
       )
       .setOrigin(0.5, 0.5);
