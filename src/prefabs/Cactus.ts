@@ -11,7 +11,7 @@ export class Cactus extends Phaser.Physics.Arcade.Sprite {
       scene,
       Cactus.generateRandomXPosition(scene),
       scene.cameras.main.height,
-      AssetKeys.CACTUS
+      Cactus.generateRandomCactus()
     );
     this.scene = scene;
     this.scene.add.existing(this);
@@ -51,5 +51,23 @@ export class Cactus extends Phaser.Physics.Arcade.Sprite {
 
   static generateRandomXPosition(scene: GameScene): number {
     return scene.cameras.main.width + Phaser.Math.Between(100, 600);
+  }
+
+  static generateRandomCactus():
+    | AssetKeys.CACTUS_1
+    | AssetKeys.CACTUS_2
+    | AssetKeys.CACTUS_3 {
+    const randomCactusNumber = Phaser.Math.Between(1, 3);
+
+    switch (randomCactusNumber) {
+      case 1:
+        return AssetKeys.CACTUS_1;
+      case 2:
+        return AssetKeys.CACTUS_2;
+      case 3:
+        return AssetKeys.CACTUS_3;
+      default:
+        return AssetKeys.CACTUS_1;
+    }
   }
 }
