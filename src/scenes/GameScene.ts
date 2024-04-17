@@ -49,6 +49,10 @@ export class GameScene extends AbstractScene {
     }
   }
 
+  calculateScore(score: number = 0): string {
+    return `Score: ${score}`;
+  }
+
   createBackground(): void {
     this.backgroundTileSprite = this.add
       .tileSprite(
@@ -59,10 +63,6 @@ export class GameScene extends AbstractScene {
         AssetKeys.BACKGROUND
       )
       .setOrigin(0, 0);
-  }
-
-  calculateScore(score: number = 0): string {
-    return `Score: ${score}`;
   }
 
   createCactusesGroup(): void {
