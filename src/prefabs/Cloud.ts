@@ -11,7 +11,7 @@ export class Cloud extends Phaser.Physics.Arcade.Sprite {
       scene,
       scene.cameras.main.width + 100,
       Cloud.generateRandomYPosition(scene),
-      AssetKeys.CLOUD
+      Cloud.generateRandomCloud()
     );
     this.scene = scene;
     this.scene.add.existing(this);
@@ -48,6 +48,19 @@ export class Cloud extends Phaser.Physics.Arcade.Sprite {
       this.detectPositionForDestroy,
       this
     );
+  }
+
+  static generateRandomCloud(): AssetKeys.CLOUD_1 | AssetKeys.CLOUD_2 {
+    const randomCactusNumber = Phaser.Math.Between(1, 2);
+
+    switch (randomCactusNumber) {
+      case 1:
+        return AssetKeys.CLOUD_1;
+      case 2:
+        return AssetKeys.CLOUD_2;
+      default:
+        return AssetKeys.CLOUD_1;
+    }
   }
 
   static generateRandomYPosition(scene: GameScene): number {
