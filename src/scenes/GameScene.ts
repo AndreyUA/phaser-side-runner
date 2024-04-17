@@ -97,7 +97,10 @@ export class GameScene extends AbstractScene {
         this.cameras.main.width * 0.05,
         this.cameras.main.height * 0.05,
         this.calculateScore(),
-        defaultTextStyle
+        {
+          ...defaultTextStyle,
+          color: "#000000",
+        }
       )
       .setOrigin(0, 0)
       .setDepth(3);
