@@ -6,6 +6,7 @@ import { Dino } from "../prefabs/Dino";
 import { Cloud } from "../prefabs/Cloud";
 import { CactusesGroup } from "../prefabs/CactusesGroup";
 import { defaultTextStyle } from "../constants/defaultTextStyle";
+import { AssetKeys } from "../constants/assetKeys";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
@@ -15,6 +16,7 @@ export class GameScene extends AbstractScene {
   cactusTimer: Phaser.Time.TimerEvent | null = null;
   scoreTimer: Phaser.Time.TimerEvent | null = null;
   statsText: Phaser.GameObjects.Text | null = null;
+  backgroundTileSprite: Phaser.GameObjects.TileSprite | null = null;
   score: number = 0;
 
   constructor() {
@@ -30,6 +32,7 @@ export class GameScene extends AbstractScene {
   create(): void {
     super.create();
 
+    this.createBackground();
     this.createDino();
     this.createCactusesGroup();
     this.createCursorKeys();
@@ -40,6 +43,22 @@ export class GameScene extends AbstractScene {
 
   update(_time: number, _delta: number): void {
     this.dino?.onMove();
+
+    if (this.backgroundTileSprite) {
+      this.backgroundTileSprite.tilePositionX += 11;
+    }
+  }
+
+  createBackground(): void {
+    this.backgroundTileSprite = this.add
+      .tileSprite(
+        0,
+        0,
+        +this.game.config.width,
+        +this.game.config.height,
+        AssetKeys.BACKGROUND
+      )
+      .setOrigin(0, 0);
   }
 
   calculateScore(score: number = 0): string {

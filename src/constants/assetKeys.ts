@@ -1,4 +1,5 @@
 export enum AssetKeys {
+  BACKGROUND = "BACKGROUND",
   DINO_ATLAS = "DINO_ATLAS",
   CLOUD_1 = "CLOUD_1",
   CLOUD_2 = "CLOUD_2",

@@ -15,6 +15,7 @@ export class PreloadScene extends AbstractScene {
 
   preload(): void {
     this.load.atlas(AssetKeys.DINO_ATLAS, "./dino.png", "./dino.json");
+    this.load.image(AssetKeys.BACKGROUND, "./background.png");
     this.load.image(AssetKeys.CLOUD_1, "./cloud1.png");
     this.load.image(AssetKeys.CLOUD_2, "./cloud2.png");
     this.load.image(AssetKeys.CACTUS_1, "./cactus1.png");
