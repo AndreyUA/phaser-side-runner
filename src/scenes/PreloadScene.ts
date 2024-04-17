@@ -1,5 +1,3 @@
-import * as Phaser from "phaser";
-
 import { AbstractScene } from "./AbstractScene";
 import { SceneKeys } from "../constants/sceneKeys";
 import { AssetKeys } from "../constants/assetKeys";
