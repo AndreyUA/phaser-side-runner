@@ -7,6 +7,7 @@ import { Cloud } from "../prefabs/Cloud";
 import { CactusesGroup } from "../prefabs/CactusesGroup";
 import { defaultTextStyle } from "../constants/defaultTextStyle";
 import { AssetKeys } from "../constants/assetKeys";
+import { basicSpeed } from "../constants/basicSpeed";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
@@ -45,7 +46,11 @@ export class GameScene extends AbstractScene {
     this.dino?.onMove();
 
     if (this.backgroundTileSprite) {
-      this.backgroundTileSprite.tilePositionX += 11;
+      this.backgroundTileSprite.tilePositionX += basicSpeed;
+    }
+
+    if (this.cactusesGroup) {
+      this.cactusesGroup.moveGroup();
     }
   }
 

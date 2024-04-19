@@ -2,6 +2,7 @@ import * as Phaser from "phaser";
 
 import { GameScene } from "../scenes/GameScene";
 import { AssetKeys } from "../constants/assetKeys";
+import { basicSpeed } from "../constants/basicSpeed";
 
 export class Cactus extends Phaser.Physics.Arcade.Sprite {
   scene: GameScene;
@@ -31,6 +32,10 @@ export class Cactus extends Phaser.Physics.Arcade.Sprite {
       this.unSubscribeFromUpdates();
       this.destroy();
     }
+  }
+
+  move(): void {
+    this.x -= basicSpeed;
   }
 
   subscribeOnUpdates(): void {

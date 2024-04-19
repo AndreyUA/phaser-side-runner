@@ -16,6 +16,17 @@ export class CactusesGroup extends Phaser.Physics.Arcade.Group {
     const cactus = new Cactus(this.scene);
 
     this.add(cactus);
-    cactus.setVelocityX(-660);
+  }
+
+  moveGroup(): void {
+    this.children.iterate((cactus) => {
+      if (cactus instanceof Cactus) {
+        cactus.move();
+
+        return true;
+      }
+
+      return false;
+    });
   }
 }
