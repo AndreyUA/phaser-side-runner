@@ -8,6 +8,7 @@ import { CactusesGroup } from "../prefabs/CactusesGroup";
 import { defaultTextStyle } from "../constants/defaultTextStyle";
 import { AssetKeys } from "../constants/assetKeys";
 import { basicSpeed } from "../constants/basicSpeed";
+import { invisibleFloorHeight } from "../constants/invisibleFloorHeight";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
@@ -40,6 +41,19 @@ export class GameScene extends AbstractScene {
     this.createStatsText();
     this.generateCloud();
     this.initTimers();
+
+    const platform = this.physics.add.staticGroup();
+    platform.create(-100, this.cameras.main.height);
+
+    (platform.getFirstAlive() as Phaser.GameObjects.Sprite).setSize(
+      this.cameras.main.width * 2,
+      invisibleFloorHeight
+    );
+
+    platform.setOrigin(0, 1).refresh();
+    platform.setVisible(false);
+
+    this.physics.add.collider(this.dino!, platform);
   }
 
   update(_time: number, _delta: number): void {

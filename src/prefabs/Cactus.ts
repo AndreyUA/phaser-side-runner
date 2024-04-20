@@ -3,6 +3,7 @@ import * as Phaser from "phaser";
 import { GameScene } from "../scenes/GameScene";
 import { AssetKeys } from "../constants/assetKeys";
 import { basicSpeed } from "../constants/basicSpeed";
+import { invisibleFloorHeight } from "../constants/invisibleFloorHeight";
 
 export class Cactus extends Phaser.Physics.Arcade.Sprite {
   scene: GameScene;
@@ -11,7 +12,7 @@ export class Cactus extends Phaser.Physics.Arcade.Sprite {
     super(
       scene,
       Cactus.generateRandomXPosition(scene),
-      scene.cameras.main.height,
+      scene.cameras.main.height - invisibleFloorHeight,
       Cactus.generateRandomCactus()
     );
     this.scene = scene;
