@@ -1,6 +1,7 @@
 import { AbstractScene } from "./AbstractScene";
 import { SceneKeys } from "../constants/sceneKeys";
 import { defaultTextStyle } from "../constants/defaultTextStyle";
+import { AssetKeys } from "../constants/assetKeys";
 
 export class StartScene extends AbstractScene {
   isFirstStart: boolean = true;
@@ -30,6 +31,7 @@ export class StartScene extends AbstractScene {
     }
 
     this.input.keyboard.once("keydown-ENTER", () => {
+      this.sound.stopByKey(AssetKeys.DIED);
       this.isFirstStart = false;
       this.scene.start(SceneKeys.GAME);
     });
@@ -37,6 +39,8 @@ export class StartScene extends AbstractScene {
 
   createStartText(): void {
     if (!this.isFirstStart) {
+      this.sound.play(AssetKeys.DIED, { volume: 1, loop: false });
+
       this.add
         .text(
           this.scene.scene.scale.width / 2,
