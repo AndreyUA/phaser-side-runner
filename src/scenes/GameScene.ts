@@ -37,23 +37,11 @@ export class GameScene extends AbstractScene {
     this.createBackground();
     this.createDino();
     this.createCactusesGroup();
+    this.createInvisibleFloor();
     this.createCursorKeys();
     this.createStatsText();
     this.generateCloud();
     this.initTimers();
-
-    const platform = this.physics.add.staticGroup();
-    platform.create(-100, this.cameras.main.height);
-
-    (platform.getFirstAlive() as Phaser.GameObjects.Sprite).setSize(
-      this.cameras.main.width * 2,
-      invisibleFloorHeight
-    );
-
-    platform.setOrigin(0, 1).refresh();
-    platform.setVisible(false);
-
-    this.physics.add.collider(this.dino!, platform);
   }
 
   update(_time: number, _delta: number): void {
@@ -108,6 +96,21 @@ export class GameScene extends AbstractScene {
 
   createDino(): void {
     this.dino = new Dino(this);
+  }
+
+  createInvisibleFloor(): void {
+    const platform = this.physics.add.staticGroup();
+    platform.create(-100, this.cameras.main.height);
+
+    (platform.getFirstAlive() as Phaser.GameObjects.Sprite).setSize(
+      this.cameras.main.width * 2,
+      invisibleFloorHeight
+    );
+
+    platform.setOrigin(0, 1).refresh();
+    platform.setVisible(false);
+
+    this.physics.add.collider(this.dino!, platform);
   }
 
   createStatsText(): void {
