@@ -59,7 +59,11 @@ export class StartScene extends AbstractScene {
       .text(
         this.scene.scene.scale.width / 2,
         this.scene.scene.scale.height / 2,
-        "Press ENTER to start the game.\n\n      Use SPACE to jump.",
+        `Press ENTER to start the game.\n\n      Use SPACE to jump.${
+          StartScene.isFullScreenAvailable(this)
+            ? "\n\n  Use F to toggle fullscreen."
+            : ""
+        }`,
         defaultTextStyle
       )
       .setOrigin(0.5, 0.5);
