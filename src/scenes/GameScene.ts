@@ -9,6 +9,7 @@ import { defaultTextStyle } from "../constants/defaultTextStyle";
 import { AssetKeys } from "../constants/assetKeys";
 import { basicSpeed } from "../constants/basicSpeed";
 import { invisibleFloorHeight } from "../constants/invisibleFloorHeight";
+import { StartScene } from "./StartScene";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
@@ -42,6 +43,7 @@ export class GameScene extends AbstractScene {
     this.createStatsText();
     this.generateCloud();
     this.initTimers();
+    StartScene.initFullScreenListeners(this);
   }
 
   update(_time: number, _delta: number): void {

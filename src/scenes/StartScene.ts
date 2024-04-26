@@ -21,6 +21,7 @@ export class StartScene extends AbstractScene {
 
     this.createStartText();
     this.createTapListener();
+    StartScene.initFullScreenListeners(this);
   }
 
   update(_time: number, _delta: number): void {}
@@ -62,5 +63,25 @@ export class StartScene extends AbstractScene {
         defaultTextStyle
       )
       .setOrigin(0.5, 0.5);
+  }
+
+  static initFullScreenListeners(scene: AbstractScene): void {
+    if (!scene?.input?.keyboard || !StartScene.isFullScreenAvailable(scene)) {
+      return;
+    }
+
+    scene.input.keyboard.on("keydown-F", () => {
+      if (!StartScene.isFullScreen(scene)) {
+        scene.scale.startFullscreen();
+      }
+    });
+  }
+
+  static isFullScreenAvailable(scene: AbstractScene): boolean {
+    return scene.sys.game.device.fullscreen.available;
+  }
+
+  static isFullScreen(scene: AbstractScene): boolean {
+    return scene.scale.isFullscreen;
   }
 }
