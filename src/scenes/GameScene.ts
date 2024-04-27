@@ -111,6 +111,8 @@ export class GameScene extends AbstractScene {
     console.log("Here is selected dino: ", this.selectedDino);
 
     this.dino = new Dino(this);
+
+    // TODO: add selected dino to session storage
   }
 
   createInvisibleFloor(): void {

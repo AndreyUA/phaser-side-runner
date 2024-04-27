@@ -34,6 +34,9 @@ export class StartScene extends AbstractScene {
     this.input.keyboard.once("keydown-ENTER", () => {
       this.sound.stopByKey(AssetKeys.DIED);
       this.isFirstStart = false;
+
+      // TODO: add condition to check if the player has selected a character
+      // (from session storage)
       this.scene.start(SceneKeys.SELECT_CHARACTER);
     });
   }
