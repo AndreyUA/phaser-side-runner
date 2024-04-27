@@ -1,9 +1,11 @@
+import * as Phaser from "phaser";
+
 import { AbstractScene } from "./AbstractScene";
 import { SceneKeys } from "../constants/sceneKeys";
 
-export class BootScene extends AbstractScene {
+export class SelectCharacterScene extends AbstractScene {
   constructor() {
-    super({ key: SceneKeys.BOOT, active: true });
+    super({ key: SceneKeys.SELECT_CHARACTER, active: false });
   }
 
   init(): void {
@@ -17,7 +19,7 @@ export class BootScene extends AbstractScene {
   create(): void {
     super.create();
 
-    this.scene.start(SceneKeys.PRELOAD);
+    this.scene.start(SceneKeys.GAME);
   }
 
   update(_time: number, _delta: number): void {}

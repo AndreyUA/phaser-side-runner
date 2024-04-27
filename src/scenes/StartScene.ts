@@ -34,7 +34,7 @@ export class StartScene extends AbstractScene {
     this.input.keyboard.once("keydown-ENTER", () => {
       this.sound.stopByKey(AssetKeys.DIED);
       this.isFirstStart = false;
-      this.scene.start(SceneKeys.GAME);
+      this.scene.start(SceneKeys.SELECT_CHARACTER);
     });
   }
 
