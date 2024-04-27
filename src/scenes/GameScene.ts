@@ -10,10 +10,12 @@ import { AssetKeys } from "../constants/assetKeys";
 import { basicSpeed } from "../constants/basicSpeed";
 import { invisibleFloorHeight } from "../constants/invisibleFloorHeight";
 import { StartScene } from "./StartScene";
+import { DinoType } from "../constants/dinoType";
 
 export class GameScene extends AbstractScene {
   spaceCursor: Phaser.Input.Keyboard.Key | null = null;
   dino: Dino | null = null;
+  selectedDino: DinoType | null = null;
   cactusesGroup: CactusesGroup | null = null;
   cloudTimer: Phaser.Time.TimerEvent | null = null;
   cactusTimer: Phaser.Time.TimerEvent | null = null;
@@ -97,6 +99,17 @@ export class GameScene extends AbstractScene {
   }
 
   createDino(): void {
+    if (typeof this.sys.settings.data !== "object") {
+      return;
+    }
+
+    if ("selectedCharacter" in this.sys.settings.data) {
+      this.selectedDino = this.sys.settings.data.selectedCharacter as DinoType;
+    }
+
+    // TODO: implement dino selection
+    console.log("Here is selected dino: ", this.selectedDino);
+
     this.dino = new Dino(this);
   }
 

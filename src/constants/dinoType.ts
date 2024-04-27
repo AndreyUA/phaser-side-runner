@@ -1,0 +1,4 @@
+export enum DinoType {
+  TYRANNOSAUR = "TYRANNOSAUR",
+  SPINOSAURUS = "SPINOSAURUS",
+}
