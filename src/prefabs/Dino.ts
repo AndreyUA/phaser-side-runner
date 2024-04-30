@@ -42,14 +42,18 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     this.generateAtlasAnimation();
   }
 
+  // TODO: remove animations because of possible dino selection from a user
   generateAtlasAnimation(): void {
-    if (this.scene.anims.exists(Animations.DINO_ANIMATION)) {
-      this.play(Animations.DINO_ANIMATION);
+    if (
+      this.scene.anims.exists(Animations.DINO_RUN) &&
+      this.scene.anims.exists(Animations.DINO_JUMP)
+    ) {
+      this.play(Animations.DINO_RUN);
 
       return;
     }
 
-    const frames = this.scene.anims.generateFrameNames(
+    const runFrames = this.scene.anims.generateFrameNames(
       this.selectedDinoTexture,
       {
         prefix:
@@ -61,15 +65,34 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
         end: 2,
       }
     );
+    const jumpFrames = this.scene.anims.generateFrameNames(
+      this.selectedDinoTexture,
+      {
+        prefix:
+          this.selectedDinoTexture === AssetKeys.DINO_ATLAS_SPINOSAURUS
+            ? "dino_a_"
+            : "dino_b_",
+        suffix: ".png",
+        start: 3,
+        end: 3,
+      }
+    );
 
     this.scene.anims.create({
-      key: Animations.DINO_ANIMATION,
-      frames,
+      key: Animations.DINO_RUN,
+      frames: runFrames,
       frameRate: 6,
       repeat: -1,
     });
 
-    this.play(Animations.DINO_ANIMATION);
+    this.scene.anims.create({
+      key: Animations.DINO_JUMP,
+      frames: jumpFrames,
+      frameRate: 6,
+      repeat: -1,
+    });
+
+    this.play(Animations.DINO_RUN);
   }
 
   onMove(): void {
@@ -83,7 +106,8 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (isDinoOnTheGround && isSpaceKeyDown) {
-      this.setVelocityY(-1_400);
+      this.play(Animations.DINO_JUMP);
+      this.setVelocityY(-1_500);
 
       this.scene.tweens.add({
         targets: this,
@@ -92,6 +116,10 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
         ease: "Linear",
         repeat: 0,
         yoyo: false,
+        callbackScope: this,
+        onComplete: () => {
+          this.play(Animations.DINO_RUN);
+        },
       });
     }
   }

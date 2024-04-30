@@ -1,3 +1,4 @@
 export enum Animations {
-  DINO_ANIMATION = "DINO_ANIMATION",
+  DINO_RUN = "DINO_RUN",
+  DINO_JUMP = "DINO_JUMP",
 }
