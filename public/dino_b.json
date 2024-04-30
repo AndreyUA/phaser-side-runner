@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "dino_b_1.png",
+	"frame": {"x":1,"y":1,"w":160,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":160},
+	"sourceSize": {"w":160,"h":160}
+},
+{
+	"filename": "dino_b_2.png",
+	"frame": {"x":162,"y":1,"w":160,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":160},
+	"sourceSize": {"w":160,"h":160}
+},
+{
+	"filename": "dino_b_3.png",
+	"frame": {"x":323,"y":1,"w":160,"h":160},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":160},
+	"sourceSize": {"w":160,"h":160}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "dino_b.png",
+	"format": "RGBA8888",
+	"size": {"w":484,"h":162},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a648eeed19c32c46e4108e6205ed7313:2010258ef60357317ea32400177de6df:1e2883bedc721ca772140590df1f4ab0$"
+}
+}
