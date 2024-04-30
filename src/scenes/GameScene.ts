@@ -110,7 +110,11 @@ export class GameScene extends AbstractScene {
     // TODO: implement dino selection
     console.log("Here is selected dino: ", this.selectedDino);
 
-    this.dino = new Dino(this);
+    if (!this.selectedDino) {
+      return;
+    }
+
+    this.dino = new Dino(this, this.selectedDino);
 
     // TODO: add selected dino to session storage
   }
@@ -160,6 +164,8 @@ export class GameScene extends AbstractScene {
     this.cloudTimer?.destroy();
     this.cactusTimer?.destroy();
     this.scoreTimer?.destroy();
+    this.dino?.destroy();
+    this.dino = null;
 
     this.scene.start(SceneKeys.START);
   }

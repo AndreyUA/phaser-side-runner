@@ -12,7 +12,16 @@ export class PreloadScene extends AbstractScene {
   }
 
   preload(): void {
-    this.load.atlas(AssetKeys.DINO_ATLAS, "./dino.png", "./dino.json");
+    this.load.atlas(
+      AssetKeys.DINO_ATLAS_SPINOSAURUS,
+      "./dino_a.png",
+      "./dino_a.json"
+    );
+    this.load.atlas(
+      AssetKeys.DINO_ATLAS_TYRANNOSAURUS,
+      "./dino_b.png",
+      "./dino_b.json"
+    );
 
     this.load.image(AssetKeys.BACKGROUND, "./background.png");
     this.load.image(AssetKeys.CLOUD_1, "./cloud1.png");
