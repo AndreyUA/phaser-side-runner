@@ -6,6 +6,7 @@ import { AssetKeys } from "../constants/assetKeys";
 import { StartScene } from "./StartScene";
 import { BLACK, WARM_GREEN } from "../constants/hexColors";
 import { DinoType } from "../constants/dinoType";
+import { SessionStorageKeys } from "../constants/sessionStorageKeys";
 
 export class SelectCharacterScene extends AbstractScene {
   selector: Phaser.GameObjects.Graphics | null = null;
@@ -99,9 +100,18 @@ export class SelectCharacterScene extends AbstractScene {
     }
 
     this.input.keyboard.once("keydown-ENTER", () => {
-      this.scene.start(SceneKeys.GAME, {
-        selectedCharacter: this.selectedCharacter,
-      });
+      try {
+        globalThis.sessionStorage.setItem(
+          SessionStorageKeys.SELECTED_CHARACTER,
+          this.selectedCharacter
+        );
+      } catch (_error) {
+        console.error("Failed to save selected character to session storage");
+      } finally {
+        this.scene.start(SceneKeys.GAME, {
+          selectedCharacter: this.selectedCharacter,
+        });
+      }
     });
 
     this.input.keyboard.on("keydown-LEFT", () => {

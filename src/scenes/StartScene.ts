@@ -2,12 +2,33 @@ import { AbstractScene } from "./AbstractScene";
 import { SceneKeys } from "../constants/sceneKeys";
 import { defaultTextStyle } from "../constants/defaultTextStyle";
 import { AssetKeys } from "../constants/assetKeys";
+import { DinoType } from "../constants/dinoType";
+import { SessionStorageKeys } from "../constants/sessionStorageKeys";
 
 export class StartScene extends AbstractScene {
   isFirstStart: boolean = true;
+  isDinoSelected: boolean = false;
 
   constructor() {
     super({ key: SceneKeys.START, active: false });
+
+    try {
+      const selectedCharacter = globalThis.sessionStorage.getItem(
+        SessionStorageKeys.SELECTED_CHARACTER
+      ) as keyof typeof DinoType;
+
+      if (
+        !selectedCharacter ||
+        !(selectedCharacter in DinoType) ||
+        !DinoType[selectedCharacter]
+      ) {
+        return;
+      }
+
+      this.isDinoSelected = true;
+    } catch (error) {
+      this.isDinoSelected = false;
+    }
   }
 
   init(): void {
@@ -31,13 +52,45 @@ export class StartScene extends AbstractScene {
       return;
     }
 
+    this.input.keyboard.once("keydown-S", () => {
+      this.sound.stopByKey(AssetKeys.DIED);
+
+      try {
+        globalThis.sessionStorage.removeItem(
+          SessionStorageKeys.SELECTED_CHARACTER
+        );
+      } catch (error) {
+        console.error("Error removing selected character", error);
+      } finally {
+        this.scene.start(SceneKeys.SELECT_CHARACTER);
+      }
+    });
+
     this.input.keyboard.once("keydown-ENTER", () => {
       this.sound.stopByKey(AssetKeys.DIED);
       this.isFirstStart = false;
 
-      // TODO: add condition to check if the player has selected a character
-      // (from session storage)
-      this.scene.start(SceneKeys.SELECT_CHARACTER);
+      try {
+        const selectedCharacter = globalThis.sessionStorage.getItem(
+          SessionStorageKeys.SELECTED_CHARACTER
+        ) as keyof typeof DinoType;
+
+        if (
+          !selectedCharacter ||
+          !(selectedCharacter in DinoType) ||
+          !DinoType[selectedCharacter]
+        ) {
+          this.scene.start(SceneKeys.SELECT_CHARACTER);
+
+          return;
+        }
+
+        this.scene.start(SceneKeys.GAME, {
+          selectedCharacter,
+        });
+      } catch (_error) {
+        this.scene.start(SceneKeys.SELECT_CHARACTER);
+      }
     });
   }
 
@@ -66,7 +119,8 @@ export class StartScene extends AbstractScene {
           StartScene.isFullScreenAvailable(this)
             ? "\n\n  Use F to toggle fullscreen."
             : ""
-        }`,
+          // TODO: it is not working
+        }${this.isDinoSelected ? "\n\n     Use S to change dino!" : ""}`,
         defaultTextStyle
       )
       .setOrigin(0.5, 0.5);
