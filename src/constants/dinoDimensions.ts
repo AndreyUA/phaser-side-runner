@@ -1,4 +1,4 @@
 export const DINO_DIMENSIONS = {
-  height: 163,
-  width: 81,
+  height: 160,
+  width: 160,
 };
