@@ -107,9 +107,6 @@ export class GameScene extends AbstractScene {
       this.selectedDino = this.sys.settings.data.selectedCharacter as DinoType;
     }
 
-    // TODO: implement dino selection
-    console.log("Here is selected dino: ", this.selectedDino);
-
     if (!this.selectedDino) {
       return;
     }

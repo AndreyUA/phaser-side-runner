@@ -29,6 +29,7 @@ export class SelectCharacterScene extends AbstractScene {
     this.createBackground();
     this.createCharacterSelection();
     this.createTapListener();
+    this.createFaces();
 
     StartScene.initFullScreenListeners(this);
   }
@@ -69,6 +70,27 @@ export class SelectCharacterScene extends AbstractScene {
         300
       );
     this.selectedCharacter = DinoType.TYRANNOSAUR;
+  }
+
+  createFaces(): void {
+    // TODO: place tyrannosaurus face here
+    this.add
+      .image(
+        this.scene.scene.scale.width / 2 - 400 + 10,
+        this.scene.scene.scale.height / 2 - 250 + 10,
+        AssetKeys.DINO_FACE_SPINOSAURUS
+      )
+      .setOrigin(0, 0)
+      .setDepth(1);
+
+    this.add
+      .image(
+        this.scene.scene.scale.width / 2 + 100 + 10,
+        this.scene.scene.scale.height / 2 - 250 + 10,
+        AssetKeys.DINO_FACE_SPINOSAURUS
+      )
+      .setOrigin(0, 0)
+      .setDepth(1);
   }
 
   createTapListener(): void {
