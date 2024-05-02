@@ -164,6 +164,7 @@ export class GameScene extends AbstractScene {
     this.cloudTimer?.destroy();
     this.cactusTimer?.destroy();
     this.scoreTimer?.destroy();
+    this.dino?.destroyAnimations();
     this.dino?.destroy();
     this.dino = null;
 

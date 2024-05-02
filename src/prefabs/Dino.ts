@@ -2,7 +2,7 @@ import * as Phaser from "phaser";
 
 import { GameScene } from "../scenes/GameScene";
 import { AssetKeys } from "../constants/assetKeys";
-import { Animations } from "../constants/animations";
+import { DinoAnimations } from "../constants/dinoAnimations";
 import { DINO_DIMENSIONS } from "../constants/dinoDimensions";
 import { DinoType } from "../constants/dinoType";
 
@@ -42,17 +42,13 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     this.generateAtlasAnimation();
   }
 
-  // TODO: remove animations because of possible dino selection from a user
+  destroyAnimations(): void {
+    Object.values(DinoAnimations).forEach((animationKey) => {
+      this.scene.anims.remove(animationKey);
+    });
+  }
+
   generateAtlasAnimation(): void {
-    if (
-      this.scene.anims.exists(Animations.DINO_RUN) &&
-      this.scene.anims.exists(Animations.DINO_JUMP)
-    ) {
-      this.play(Animations.DINO_RUN);
-
-      return;
-    }
-
     const runFrames = this.scene.anims.generateFrameNames(
       this.selectedDinoTexture,
       {
@@ -79,20 +75,20 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     );
 
     this.scene.anims.create({
-      key: Animations.DINO_RUN,
+      key: DinoAnimations.DINO_RUN,
       frames: runFrames,
       frameRate: 6,
       repeat: -1,
     });
 
     this.scene.anims.create({
-      key: Animations.DINO_JUMP,
+      key: DinoAnimations.DINO_JUMP,
       frames: jumpFrames,
       frameRate: 6,
       repeat: -1,
     });
 
-    this.play(Animations.DINO_RUN);
+    this.play(DinoAnimations.DINO_RUN);
   }
 
   onMove(): void {
@@ -106,7 +102,7 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
     );
 
     if (isDinoOnTheGround && isSpaceKeyDown) {
-      this.play(Animations.DINO_JUMP);
+      this.play(DinoAnimations.DINO_JUMP);
       this.setVelocityY(-1_500);
 
       this.scene.tweens.add({
@@ -118,7 +114,7 @@ export class Dino extends Phaser.Physics.Arcade.Sprite {
         yoyo: false,
         callbackScope: this,
         onComplete: () => {
-          this.play(Animations.DINO_RUN);
+          this.play(DinoAnimations.DINO_RUN);
         },
       });
     }
