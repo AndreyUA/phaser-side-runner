@@ -74,12 +74,11 @@ export class SelectCharacterScene extends AbstractScene {
   }
 
   createFaces(): void {
-    // TODO: place tyrannosaurus face here
     this.add
       .image(
         this.scene.scene.scale.width / 2 - 400 + 10,
         this.scene.scene.scale.height / 2 - 250 + 10,
-        AssetKeys.DINO_FACE_SPINOSAURUS
+        AssetKeys.DINO_FACE_TYRANNOSAURUS
       )
       .setOrigin(0, 0)
       .setDepth(1);

@@ -30,6 +30,7 @@ export class PreloadScene extends AbstractScene {
     this.load.image(AssetKeys.CACTUS_2, "./cactus2.png");
     this.load.image(AssetKeys.CACTUS_3, "./cactus3.png");
     this.load.image(AssetKeys.DINO_FACE_SPINOSAURUS, "./dino_a_face.png");
+    this.load.image(AssetKeys.DINO_FACE_TYRANNOSAURUS, "./dino_b_face.png");
 
     this.load.audio(AssetKeys.DIED, "./you_died.mp3");
   }
