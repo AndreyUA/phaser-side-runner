@@ -1,1 +1,1 @@
-export const basicSpeed = 6;
+export const basicSpeed = 8;

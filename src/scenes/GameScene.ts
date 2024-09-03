@@ -176,7 +176,7 @@ export class GameScene extends AbstractScene {
       loop: true,
     });
     this.cactusTimer = this.time.addEvent({
-      delay: 1_500,
+      delay: 2_000,
       callback: this.generateCactus,
       callbackScope: this,
       loop: true,
